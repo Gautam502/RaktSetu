@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register as Hospital - RaktSetu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#f6ad55'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+        }
+        .password-strength-meter {
+            height: 4px;
+            background-color: #e5e7eb;
+            border-radius: 2px;
+            margin-top: 4px;
+        }
+        .password-strength-meter div {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .file-upload-container {
+            border: 2px dashed #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .file-upload-container:hover {
+            border-color: #cbd5e1;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-sm py-4">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <a href="iphome.html" class="text-2xl font-['Pacifico'] text-primary">RaktSetu</a>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="iphome.html" class="text-gray-600 hover:text-primary transition">Home</a></li>
+                        <li><a href="aboutpage.html" class="text-gray-600 hover:text-primary transition">About</a></li>
+                        <li><a href="contactuspage.html" class="text-gray-600 hover:text-primary transition">Contact</a></li>
+                        <li><a href="hospitallogin.html" class="text-primary font-medium">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow py-10">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8">
+                    <div class="text-center mb-8">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">Register as Hospital</h1>
+                        <p class="text-gray-600">Join RaktSetu's network to help manage blood donations efficiently</p>
+                    </div>
+                    <form id="hospitalRegistrationForm" class="space-y-6">
+                        <!-- Hospital Name -->
+                        <div>
+                            <label for="hospitalName" class="block text-sm font-medium text-gray-700 mb-1">Hospital Name <span class="text-primary">*</span></label>
+                            <input type="text" id="hospitalName" name="hospitalName" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Enter hospital name" required>
+                        </div>
+
+                        <!-- Hospital Email -->
+                        <div>
+                            <label for="hospitalEmail" class="block text-sm font-medium text-gray-700 mb-1">Hospital Email <span class="text-primary">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+                                        <i class="ri-mail-line"></i>
+                                    </div>
+                                </div>
+                                <input type="email" id="hospitalEmail" name="hospitalEmail" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="hospital@example.com" required>
+                            </div>
+                            <p id="emailValidationMessage" class="mt-1 text-sm hidden"></p>
+                        </div>
+                        <!-- Contact Number -->
+                        <div>
+                            <label for="contactNumber" class="block text-sm font-medium text-gray-700 mb-1">Contact Number <span class="text-primary">*</span></label>
+                            <div class="flex">
+                                <div class="w-20 flex-shrink-0">
+                                    <select id="countryCode" class="w-full px-3 py-3 border border-gray-300 rounded-l focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition bg-white text-gray-700">
+                                        <option value="+91">+91</option>
+                                        <option value="+1">+1</option>
+                                        <option value="+44">+44</option>
+                                        <option value="+61">+61</option>
+                                    </select>
+                                </div>
+                                <input type="number" id="contactNumber" name="contactNumber" class="w-full px-4 py-3 border border-gray-300 rounded-r focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition -ml-px" placeholder="Contact number" required>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address <span class="text-primary">*</span></label>
+                            <textarea id="address" name="address" rows="3" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Enter complete address" required></textarea>
+                        </div>
+
+                        <!-- Location Details -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- City -->
+                            <div>
+                                <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City <span class="text-primary">*</span></label>
+                                <input type="text" id="city" name="city" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="City" required>
+                            </div>
+
+                            <!-- State -->
+                            <div>
+                                <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State <span class="text-primary">*</span></label>
+                                <div class="relative">
+                                    <select id="state" name="state" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition appearance-none bg-white pr-8" required>
+                                        <option value="" disabled selected>Select state</option>
+                                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Bihar">Bihar</option>
+                                        <option value="Chhattisgarh">Chhattisgarh</option>
+                                        <option value="Delhi">Delhi</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Haryana">Haryana</option>
+                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                        <option value="Jharkhand">Jharkhand</option>
+                                        <option value="Karnataka">Karnataka</option>
+                                        <option value="Kerala">Kerala</option>
+                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                        <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+                                            <i class="ri-arrow-down-s-line"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pincode -->
+                            <div>
+                                <label for="pincode" class="block text-sm font-medium text-gray-700 mb-1">Pincode <span class="text-primary">*</span></label>
+                                <input type="number" id="pincode" name="pincode" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Pincode" required>
+                            </div>
+                        </div>
+
+                        <!-- Hospital Registration Number -->
+                        <div>
+                            <label for="registrationNumber" class="block text-sm font-medium text-gray-700 mb-1">Hospital Registration Number <span class="text-primary">*</span></label>
+                            <input type="text" id="registrationNumber" name="registrationNumber" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Enter registration number" required>
+                        </div>
+
+                        <!-- Upload License/Document -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Upload License/Document <span class="text-gray-500 text-sm font-normal">(Optional)</span></label>
+                            <div class="file-upload-container rounded p-4 text-center">
+                                <input type="file" id="licenseDocument" name="licenseDocument" class="hidden" accept=".pdf,.jpg,.jpeg,.png">
+                                <label for="licenseDocument" class="cursor-pointer block">
+                                    <div class="w-12 h-12 mx-auto flex items-center justify-center bg-gray-100 rounded-full mb-2">
+                                        <div class="w-6 h-6 flex items-center justify-center text-gray-500">
+                                            <i class="ri-upload-2-line"></i>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm text-gray-700 font-medium">Drag and drop or click to upload</p>
+                                    <p class="text-xs text-gray-500 mt-1">Supported formats: PDF, JPG, PNG (Max 5MB)</p>
+                                </label>
+                                <div id="filePreview" class="hidden mt-3 text-left">
+                                    <div class="flex items-center p-2 bg-gray-50 rounded">
+                                        <div class="w-5 h-5 flex items-center justify-center text-primary mr-2">
+                                            <i class="ri-file-line"></i>
+                                        </div>
+                                        <span id="fileName" class="text-sm text-gray-700 truncate flex-grow"></span>
+                                        <button type="button" id="removeFile" class="text-gray-400 hover:text-gray-600">
+                                            <div class="w-5 h-5 flex items-center justify-center">
+                                                <i class="ri-close-line"></i>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password <span class="text-primary">*</span></label>
+                            <div class="relative">
+                                <input type="password" id="password" name="password" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Create a strong password" required>
+                                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+                                        <i class="ri-eye-off-line"></i>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="password-strength-meter mt-2">
+                                <div id="passwordStrengthBar" class="bg-gray-200" style="width: 0%"></div>
+                            </div>
+                            <p id="passwordStrengthText" class="text-xs mt-1 text-gray-500">Password must be at least 8 characters</p>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password <span class="text-primary">*</span></label>
+                            <div class="relative">
+                                <input type="password" id="confirmPassword" name="confirmPassword" class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Confirm your password" required>
+                                <button type="button" id="toggleConfirmPassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                    <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+                                        <i class="ri-eye-off-line"></i>
+                                    </div>
+                                </button>
+                            </div>
+                            <p id="passwordMatchMessage" class="text-xs mt-1 hidden"></p>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="terms" name="terms" type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary" required>
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="terms" class="text-gray-600">I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a></label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div>
+                            <button type="submit" class="w-full bg-primary text-white py-3 px-4 rounded-button hover:bg-primary/90 transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 font-medium !rounded-button whitespace-nowrap">Register Hospital</button>
+                        </div>
+
+                        <!-- Login Link -->
+                        <div class="text-center">
+                            <p class="text-gray-600 text-sm">Already registered? <a href="hospitallogin.html" class="text-primary hover:underline font-medium">Login here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <!-- Column 1 -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">RaktSetu</h3>
+                        <p class="text-gray-400 mb-4">Connecting donors with those in need through innovative technology and compassionate care.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                                <i class="ri-facebook-fill"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                                <i class="ri-twitter-fill"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                                <i class="ri-instagram-fill"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                                <i class="ri-linkedin-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Column 2 -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 3 -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Resources</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blood Donation FAQ</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blood Types Guide</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Research & News</a></li>
+                        </ul>
+                    </div>
+                    <!-- Column 4 -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <div class="w-5 h-5 flex items-center justify-center mt-1 mr-2">
+                                    <i class="ri-map-pin-line text-primary"></i>
+                                </div>
+                                <span class="text-gray-400">123 Medical Center office, chandigarh</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-phone-line text-primary"></i>
+                                </div>
+                                <span class="text-gray-400">+91 9608769425</span>
+                            </li>
+                            <li class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-mail-line text-primary"></i>
+                                </div>
+                                <span class="text-gray-400">ananyanandgautam1503@gmail.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 mt-8 text-center">
+                    <p class="text-gray-400">&copy; 2025 RaktSetu Management System. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Password strength meter
+            const password = document.getElementById('password');
+            const passwordStrengthBar = document.getElementById('passwordStrengthBar');
+            const passwordStrengthText = document.getElementById('passwordStrengthText');
+            
+            password.addEventListener('input', function() {
+                const value = password.value;
+                let strength = 0;
+                
+                if (value.length >= 8) strength += 25;
+                if (value.match(/[A-Z]/)) strength += 25;
+                if (value.match(/[0-9]/)) strength += 25;
+                if (value.match(/[^A-Za-z0-9]/)) strength += 25;
+                
+                passwordStrengthBar.style.width = strength + '%';
+                
+                if (strength <= 25) {
+                    passwordStrengthBar.className = 'bg-red-500';
+                    passwordStrengthText.textContent = 'Weak password';
+                    passwordStrengthText.className = 'text-xs mt-1 text-red-500';
+                } else if (strength <= 50) {
+                    passwordStrengthBar.className = 'bg-orange-500';
+                    passwordStrengthText.textContent = 'Moderate password';
+                    passwordStrengthText.className = 'text-xs mt-1 text-orange-500';
+                } else if (strength <= 75) {
+                    passwordStrengthBar.className = 'bg-yellow-500';
+                    passwordStrengthText.textContent = 'Good password';
+                    passwordStrengthText.className = 'text-xs mt-1 text-yellow-600';
+                } else {
+                    passwordStrengthBar.className = 'bg-green-500';
+                    passwordStrengthText.textContent = 'Strong password';
+                    passwordStrengthText.className = 'text-xs mt-1 text-green-500';
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const password = document.getElementById('password');
+            
+            togglePassword.addEventListener('click', function() {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                
+                // Toggle icon
+                const icon = togglePassword.querySelector('i');
+                if (type === 'password') {
+                    icon.className = 'ri-eye-off-line';
+                } else {
+                    icon.className = 'ri-eye-line';
+                }
+            });
+            
+            // Toggle confirm password visibility
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const confirmPassword = document.getElementById('confirmPassword');
+            
+            toggleConfirmPassword.addEventListener('click', function() {
+                const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPassword.setAttribute('type', type);
+                
+                // Toggle icon
+                const icon = toggleConfirmPassword.querySelector('i');
+                if (type === 'password') {
+                    icon.className = 'ri-eye-off-line';
+                } else {
+                    icon.className = 'ri-eye-line';
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Password match validation
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const passwordMatchMessage = document.getElementById('passwordMatchMessage');
+            
+            function checkPasswordMatch() {
+                if (confirmPassword.value === '') {
+                    passwordMatchMessage.className = 'text-xs mt-1 hidden';
+                    return;
+                }
+                
+                if (password.value === confirmPassword.value) {
+                    passwordMatchMessage.textContent = 'Passwords match';
+                    passwordMatchMessage.className = 'text-xs mt-1 text-green-500';
+                } else {
+                    passwordMatchMessage.textContent = 'Passwords do not match';
+                    passwordMatchMessage.className = 'text-xs mt-1 text-red-500';
+                }
+            }
+            
+            confirmPassword.addEventListener('input', checkPasswordMatch);
+            password.addEventListener('input', function() {
+                if (confirmPassword.value !== '') {
+                    checkPasswordMatch();
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Email validation
+            const emailInput = document.getElementById('hospitalEmail');
+            const emailValidationMessage = document.getElementById('emailValidationMessage');
+            
+            emailInput.addEventListener('blur', function() {
+                const email = emailInput.value.trim();
+                if (email === '') return;
+                
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    emailValidationMessage.textContent = 'Please enter a valid email address';
+                    emailValidationMessage.className = 'mt-1 text-sm text-red-500';
+                } else {
+                    emailValidationMessage.textContent = 'Valid email address';
+                    emailValidationMessage.className = 'mt-1 text-sm text-green-500';
+                    
+                    // After a short delay, hide the success message
+                    setTimeout(() => {
+                        emailValidationMessage.className = 'mt-1 text-sm hidden';
+                    }, 2000);
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // File upload handling
+            const fileInput = document.getElementById('licenseDocument');
+            const filePreview = document.getElementById('filePreview');
+            const fileName = document.getElementById('fileName');
+            const removeFileBtn = document.getElementById('removeFile');
+            
+            fileInput.addEventListener('change', function(e) {
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    
+                    // Check file size (5MB max)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('File size exceeds 5MB limit');
+                        fileInput.value = '';
+                        return;
+                    }
+                    
+                    fileName.textContent = file.name;
+                    filePreview.classList.remove('hidden');
+                }
+            });
+            
+            removeFileBtn.addEventListener('click', function() {
+                fileInput.value = '';
+                filePreview.classList.add('hidden');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pincode auto-detection (simulated)
+            const pincodeInput = document.getElementById('pincode');
+            const cityInput = document.getElementById('city');
+            const stateSelect = document.getElementById('state');
+            
+            const pincodeMappings = {
+                '110001': { city: 'New Delhi', state: 'Delhi' },
+                '400001': { city: 'Mumbai', state: 'Maharashtra' },
+                '700001': { city: 'Kolkata', state: 'West Bengal' },
+                '600001': { city: 'Chennai', state: 'Tamil Nadu' },
+                '560001': { city: 'Bangalore', state: 'Karnataka' }
+            };
+            
+            pincodeInput.addEventListener('blur', function() {
+                const pincode = pincodeInput.value.trim();
+                if (pincode.length === 6 && pincodeMappings[pincode]) {
+                    const data = pincodeMappings[pincode];
+                    cityInput.value = data.city;
+                    
+                    // Find and select the state option
+                    for (let i = 0; i < stateSelect.options.length; i++) {
+                        if (stateSelect.options[i].value === data.state) {
+                            stateSelect.selectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            const form = document.getElementById('hospitalRegistrationForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic form validation
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('border-red-500');
+                    } else {
+                        field.classList.remove('border-red-500');
+                    }
+                });
+                
+                // Password match validation
+                const password = document.getElementById('password');
+                const confirmPassword = document.getElementById('confirmPassword');
+                
+                if (password.value !== confirmPassword.value) {
+                    isValid = false;
+                    confirmPassword.classList.add('border-red-500');
+                    document.getElementById('passwordMatchMessage').textContent = 'Passwords do not match';
+                    document.getElementById('passwordMatchMessage').className = 'text-xs mt-1 text-red-500';
+                }
+                
+                if (isValid) {
+                    // Simulate form submission
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    const originalText = submitButton.textContent;
+                    
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = `
+                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Registering...
+                    `;
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        alert('Hospital registration submitted successfully!');
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalText;
+                        form.reset();
+                        
+                        // Reset UI elements
+                        document.getElementById('passwordStrengthBar').style.width = '0%';
+                        document.getElementById('passwordStrengthBar').className = 'bg-gray-200';
+                        document.getElementById('passwordStrengthText').textContent = 'Password must be at least 8 characters';
+                        document.getElementById('passwordStrengthText').className = 'text-xs mt-1 text-gray-500';
+                        document.getElementById('passwordMatchMessage').className = 'text-xs mt-1 hidden';
+                        document.getElementById('emailValidationMessage').className = 'mt-1 text-sm hidden';
+                        document.getElementById('filePreview').classList.add('hidden');
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

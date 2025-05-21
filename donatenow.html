@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate Now - Blood Bank</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#f56565'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+.calendar-day {
+width: 2.5rem;
+height: 2.5rem;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+transition: all 0.2s;
+}
+.calendar-day:hover:not(.calendar-day-disabled):not(.calendar-day-selected) {
+background-color: #fee2e2;
+}
+.calendar-day-selected {
+background-color: #e53e3e;
+color: white;
+}
+.calendar-day-disabled {
+color: #d1d5db;
+cursor: not-allowed;
+}
+input:focus, select:focus, textarea:focus {
+outline: none;
+border-color: #e53e3e;
+box-shadow: 0 0 0 1px #e53e3e;
+}
+.time-slot {
+transition: all 0.2s;
+}
+.time-slot:hover:not(.time-slot-booked) {
+border-color: #e53e3e;
+background-color: #fee2e2;
+}
+.time-slot-selected {
+background-color: #e53e3e;
+color: white;
+border-color: #e53e3e;
+}
+.time-slot-booked {
+background-color: #f3f4f6;
+color: #9ca3af;
+cursor: not-allowed;
+}
+.custom-checkbox {
+appearance: none;
+width: 1.25rem;
+height: 1.25rem;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+margin-right: 0.5rem;
+position: relative;
+cursor: pointer;
+}
+.custom-checkbox:checked {
+background-color: #e53e3e;
+border-color: #e53e3e;
+}
+.custom-checkbox:checked::after {
+content: '';
+position: absolute;
+left: 6px;
+top: 2px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-radio {
+appearance: none;
+width: 1.25rem;
+height: 1.25rem;
+border: 2px solid #d1d5db;
+border-radius: 50%;
+margin-right: 0.5rem;
+position: relative;
+cursor: pointer;
+}
+.custom-radio:checked {
+border-color: #e53e3e;
+}
+.custom-radio:checked::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 0.625rem;
+height: 0.625rem;
+border-radius: 50%;
+background-color: #e53e3e;
+}
+.progress-step {
+position: relative;
+}
+.progress-step::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 100%;
+transform: translateY(-50%);
+height: 2px;
+width: 100%;
+background-color: #e5e7eb;
+z-index: 0;
+}
+.progress-step:last-child::after {
+display: none;
+}
+.progress-step-active .progress-step-number {
+background-color: #e53e3e;
+color: white;
+}
+.progress-step-completed .progress-step-number {
+background-color: #e53e3e;
+color: white;
+}
+.progress-step-completed::after {
+background-color: #e53e3e;
+}
+</style>
+</head>
+<body class="bg-white min-h-screen">
+<header class="bg-white shadow-sm">
+<div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<div class="flex items-center">
+<h1 class="text-3xl font-['Pacifico'] text-primary">RaktSetu</h1>
+</div>
+<div class="flex items-center space-x-4">
+</div>
+</div>
+</header>
+<main class="container mx-auto px-4 py-8 max-w-5xl">
+<div class="text-center mb-8">
+<h1 class="text-4xl font-bold text-primary mb-2">Donate Now</h1>
+<p class="text-gray-600 max-w-2xl mx-auto">Your donation can save up to three lives. Complete the form below to schedule your blood donation appointment.</p>
+</div>
+<div class="flex justify-center mb-12">
+<div class="flex w-full max-w-3xl justify-between">
+<div class="progress-step progress-step-active flex-1 flex flex-col items-center z-10">
+<div class="progress-step-number w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-semibold mb-2">1</div>
+<div class="text-sm font-medium">Personal Information</div>
+</div>
+<div class="progress-step flex-1 flex flex-col items-center z-10">
+<div class="progress-step-number w-10 h-10 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-semibold mb-2">2</div>
+<div class="text-sm font-medium text-gray-500">Schedule Appointment</div>
+</div>
+</div>
+</div>
+<div class="bg-white shadow-md rounded-lg p-6 mb-8">
+<div id="step-1" class="block">
+<h2 class="text-2xl font-semibold mb-6 text-gray-800">Personal Information</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name*</label>
+<input type="text" id="firstName" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" required>
+</div>
+<div>
+<label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name*</label>
+<input type="text" id="lastName" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" required>
+</div>
+<div>
+<label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth*</label>
+<input type="date" id="dob" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Gender*</label>
+<div class="flex space-x-6 mt-2">
+<label class="flex items-center">
+<input type="radio" name="gender" value="male" class="custom-radio">
+<span>Male</span>
+</label>
+<label class="flex items-center">
+<input type="radio" name="gender" value="female" class="custom-radio">
+<span>Female</span>
+</label>
+<label class="flex items-center">
+<input type="radio" name="gender" value="other" class="custom-radio">
+<span>Other</span>
+</label>
+</div>
+</div>
+<div>
+<label for="bloodType" class="block text-sm font-medium text-gray-700 mb-1">Blood Type*</label>
+<div class="relative">
+<select id="bloodType" class="w-full px-4 py-2 border border-gray-300 rounded appearance-none pr-8 focus:border-primary" required>
+<option value="">Select your blood type</option>
+<option value="A+">A+</option>
+<option value="A-">A-</option>
+<option value="B+">B+</option>
+<option value="B-">B-</option>
+<option value="AB+">AB+</option>
+<option value="AB-">AB-</option>
+<option value="O+">O+</option>
+<option value="O-">O-</option>
+<option value="Unknown">I don't know</option>
+</select>
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+<div>
+<label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Contact Number*</label>
+<input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" required>
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address*</label>
+<input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" required>
+</div>
+<div class="md:col-span-2">
+<label for="address" class="block text-sm font-medium text-gray-700 mb-1">Current Address*</label>
+<textarea id="address" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" required></textarea>
+</div>
+</div>
+<div class="mt-8 flex justify-end">
+<button id="next-btn" class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-red-700 transition whitespace-nowrap">Next Step</button>
+</div>
+</div>
+<div id="step-2" class="hidden">
+<h2 class="text-2xl font-semibold mb-6 text-gray-800">Schedule Appointment</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<h3 class="text-lg font-medium mb-4 text-gray-800">Select Date</h3>
+<div class="bg-white border border-gray-200 rounded-lg p-4">
+<div class="flex justify-between items-center mb-4">
+<button id="prev-month" class="text-gray-500 hover:text-primary w-8 h-8 flex items-center justify-center">
+<i class="ri-arrow-left-s-line ri-lg"></i>
+</button>
+<h4 id="current-month" class="font-medium">May 2025</h4>
+<button id="next-month" class="text-gray-500 hover:text-primary w-8 h-8 flex items-center justify-center">
+<i class="ri-arrow-right-s-line ri-lg"></i>
+</button>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center mb-2">
+<div class="text-sm font-medium text-gray-500">S</div>
+<div class="text-sm font-medium text-gray-500">M</div>
+<div class="text-sm font-medium text-gray-500">T</div>
+<div class="text-sm font-medium text-gray-500">W</div>
+<div class="text-sm font-medium text-gray-500">T</div>
+<div class="text-sm font-medium text-gray-500">F</div>
+<div class="text-sm font-medium text-gray-500">S</div>
+</div>
+<div class="grid grid-cols-7 gap-1">
+<div class="calendar-day calendar-day-disabled"></div>
+<div class="calendar-day calendar-day-disabled"></div>
+<div class="calendar-day calendar-day-disabled"></div>
+<div class="calendar-day calendar-day-disabled"></div>
+<div class="calendar-day calendar-day-disabled">1</div>
+<div class="calendar-day calendar-day-disabled">2</div>
+<div class="calendar-day calendar-day-disabled">3</div>
+<div class="calendar-day calendar-day-disabled">4</div>
+<div class="calendar-day calendar-day-disabled">5</div>
+<div class="calendar-day calendar-day-disabled">6</div>
+<div class="calendar-day calendar-day-disabled">7</div>
+<div class="calendar-day calendar-day-disabled">8</div>
+<div class="calendar-day calendar-day-disabled">9</div>
+<div class="calendar-day calendar-day-disabled">10</div>
+<div class="calendar-day calendar-day-disabled">11</div>
+<div class="calendar-day calendar-day-disabled">12</div>
+<div class="calendar-day calendar-day-disabled">13</div>
+<div class="calendar-day calendar-day-disabled">14</div>
+<div class="calendar-day calendar-day-disabled">15</div>
+<div class="calendar-day calendar-day-disabled">16</div>
+<div class="calendar-day calendar-day-selected">17</div>
+<div class="calendar-day">18</div>
+<div class="calendar-day">19</div>
+<div class="calendar-day">20</div>
+<div class="calendar-day">21</div>
+<div class="calendar-day">22</div>
+<div class="calendar-day">23</div>
+<div class="calendar-day">24</div>
+<div class="calendar-day">25</div>
+<div class="calendar-day">26</div>
+<div class="calendar-day">27</div>
+<div class="calendar-day">28</div>
+<div class="calendar-day">29</div>
+<div class="calendar-day">30</div>
+<div class="calendar-day">31</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-medium mb-4 text-gray-800">Select Time</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer time-slot-booked">
+9:00 AM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer time-slot-booked">
+9:30 AM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+10:00 AM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+10:30 AM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer time-slot-selected">
+11:00 AM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+11:30 AM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+1:00 PM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+1:30 PM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+2:00 PM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+2:30 PM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+3:00 PM
+</div>
+<div class="time-slot border border-gray-300 rounded p-3 text-center cursor-pointer">
+3:30 PM
+</div>
+</div>
+<h3 class="text-lg font-medium mt-6 mb-4 text-gray-800">Select Location</h3>
+<div class="relative">
+<select id="location" class="w-full px-4 py-2 border border-gray-300 rounded appearance-none pr-8 focus:border-primary" required>
+<option value="">Select donation center</option>
+<option value="central">Central Blood Bank</option>
+<option value="north">North Community Hospital</option>
+<option value="east">East Medical Center</option>
+<option value="south">South Regional Clinic</option>
+<option value="west">West Side Health Center</option>
+</select>
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none w-4 h-4 flex items-center justify-center">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+<!-- Hospital Details Container -->
+<div id="hospital-details" class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200 hidden">
+  <h4 id="hospital-name" class="font-medium text-lg text-primary mb-2"></h4>
+  <div id="hospital-info" class="text-sm text-gray-600 mb-3"></div>
+  <h5 class="font-medium text-gray-700 mb-2">Available Time Slots:</h5>
+  <div id="hospital-time-slots" class="grid grid-cols-2 gap-2"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 border-t border-gray-200 pt-6">
+<h3 class="text-lg font-medium mb-4 text-gray-800">Medical Requirements</h3>
+<div class="space-y-3">
+<label class="flex items-start">
+<input type="checkbox" class="custom-checkbox mt-1">
+<span class="text-sm">I am between 18-65 years old</span>
+</label>
+<label class="flex items-start">
+<input type="checkbox" class="custom-checkbox mt-1">
+<span class="text-sm">I weigh at least 110 pounds (50 kg)</span>
+</label>
+<label class="flex items-start">
+<input type="checkbox" class="custom-checkbox mt-1">
+<span class="text-sm">I am in good health and feeling well today</span>
+</label>
+<label class="flex items-start">
+<input type="checkbox" class="custom-checkbox mt-1">
+<span class="text-sm">I have not donated blood in the last 56 days</span>
+</label>
+<label class="flex items-start">
+<input type="checkbox" class="custom-checkbox mt-1">
+<span class="text-sm">I have not had any recent surgeries or medical procedures</span>
+</label>
+</div>
+</div>
+<div class="mt-6">
+<label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Special Notes or Requirements (Optional)</label>
+<textarea id="notes" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary"></textarea>
+</div>
+<div class="mt-8 flex justify-between">
+<button id="back-btn" class="border border-gray-300 text-gray-700 px-6 py-2 !rounded-button hover:bg-gray-50 transition whitespace-nowrap">Back</button>
+<div>
+<button id="save-btn" class="text-gray-500 underline mr-4 whitespace-nowrap">Save for Later</button>
+<button id="submit-btn" class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-red-700 transition whitespace-nowrap">Submit</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div id="success-modal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+<div class="absolute inset-0 bg-black bg-opacity-50"></div>
+<div class="bg-white rounded-lg p-8 max-w-md w-full z-10 relative">
+<div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-green-100 rounded-full">
+<i class="ri-check-line ri-2x text-green-500"></i>
+</div>
+<h3 class="text-2xl font-bold text-center mb-2">Appointment Confirmed!</h3>
+<p id="confirmation-message" class="text-gray-600 text-center mb-6">Your blood donation appointment has been scheduled for May 17, 2025 at 11:00 AM at Central Blood Bank.</p>
+<p class="text-gray-600 text-center mb-6">A confirmation email has been sent to your email address with all the details.</p>
+<div class="flex justify-center">
+<button id="close-modal" class="bg-primary text-white px-6 py-2 !rounded-button hover:bg-red-700 transition whitespace-nowrap">Close</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const step1 = document.getElementById('step-1');
+const step2 = document.getElementById('step-2');
+const nextBtn = document.getElementById('next-btn');
+const backBtn = document.getElementById('back-btn');
+const submitBtn = document.getElementById('submit-btn');
+const saveBtn = document.getElementById('save-btn');
+const successModal = document.getElementById('success-modal');
+const closeModal = document.getElementById('close-modal');
+const locationSelect = document.getElementById('location');
+const hospitalDetails = document.getElementById('hospital-details');
+const hospitalName = document.getElementById('hospital-name');
+const hospitalInfo = document.getElementById('hospital-info');
+const hospitalTimeSlots = document.getElementById('hospital-time-slots');
+
+// Hospital data with details and available time slots
+const hospitalData = {
+  'central': {
+    name: 'Central Blood Bank',
+    address: '123 Main Street, Downtown',
+    phone: '(555) 123-4567',
+    hours: 'Mon-Fri: 8:00 AM - 5:00 PM, Sat: 9:00 AM - 2:00 PM',
+    timeSlots: [
+      { time: '9:00 AM', available: true },
+      { time: '10:00 AM', available: true },
+      { time: '11:00 AM', available: false },
+      { time: '12:00 PM', available: true },
+      { time: '1:00 PM', available: true },
+      { time: '2:00 PM', available: false },
+      { time: '3:00 PM', available: true },
+      { time: '4:00 PM', available: true }
+    ]
+  },
+  'north': {
+    name: 'North Community Hospital',
+    address: '456 North Avenue, Northside',
+    phone: '(555) 234-5678',
+    hours: 'Mon-Fri: 7:00 AM - 6:00 PM, Sat-Sun: 8:00 AM - 12:00 PM',
+    timeSlots: [
+      { time: '8:00 AM', available: true },
+      { time: '9:00 AM', available: false },
+      { time: '10:00 AM', available: true },
+      { time: '11:00 AM', available: true },
+      { time: '1:00 PM', available: false },
+      { time: '2:00 PM', available: true },
+      { time: '3:00 PM', available: true },
+      { time: '4:00 PM', available: false }
+    ]
+  },
+  'east': {
+    name: 'East Medical Center',
+    address: '789 East Boulevard, Eastside',
+    phone: '(555) 345-6789',
+    hours: 'Mon-Fri: 8:30 AM - 4:30 PM',
+    timeSlots: [
+      { time: '9:00 AM', available: true },
+      { time: '10:00 AM', available: false },
+      { time: '11:00 AM', available: true },
+      { time: '12:00 PM', available: false },
+      { time: '1:00 PM', available: true },
+      { time: '2:00 PM', available: true },
+      { time: '3:00 PM', available: false },
+      { time: '4:00 PM', available: true }
+    ]
+  },
+  'south': {
+    name: 'South Regional Clinic',
+    address: '321 South Road, Southside',
+    phone: '(555) 456-7890',
+    hours: 'Mon-Thu: 9:00 AM - 5:00 PM, Fri: 9:00 AM - 3:00 PM',
+    timeSlots: [
+      { time: '9:30 AM', available: true },
+      { time: '10:30 AM', available: true },
+      { time: '11:30 AM', available: false },
+      { time: '12:30 PM', available: true },
+      { time: '1:30 PM', available: false },
+      { time: '2:30 PM', available: true },
+      { time: '3:30 PM', available: true },
+      { time: '4:30 PM', available: false }
+    ]
+  },
+  'west': {
+    name: 'West Side Health Center',
+    address: '654 West Street, Westside',
+    phone: '(555) 567-8901',
+    hours: 'Mon-Fri: 8:00 AM - 6:00 PM',
+    timeSlots: [
+      { time: '8:30 AM', available: true },
+      { time: '9:30 AM', available: false },
+      { time: '10:30 AM', available: true },
+      { time: '11:30 AM', available: true },
+      { time: '1:30 PM', available: true },
+      { time: '2:30 PM', available: false },
+      { time: '3:30 PM', available: true },
+      { time: '4:30 PM', available: false }
+    ]
+  }
+};
+
+// Calendar days
+const calendarDays = document.querySelectorAll('.calendar-day:not(.calendar-day-disabled)');
+// Time slots
+const timeSlots = document.querySelectorAll('.time-slot:not(.time-slot-booked)');
+
+// Location selection
+locationSelect.addEventListener('change', function() {
+  const selectedLocation = this.value;
+  
+  if (selectedLocation && hospitalData[selectedLocation]) {
+    const hospital = hospitalData[selectedLocation];
+    
+    // Display hospital details
+    hospitalName.textContent = hospital.name;
+    hospitalInfo.innerHTML = `
+      <p><strong>Address:</strong> ${hospital.address}</p>
+      <p><strong>Phone:</strong> ${hospital.phone}</p>
+      <p><strong>Hours:</strong> ${hospital.hours}</p>
+    `;
+    
+    // Display time slots
+    hospitalTimeSlots.innerHTML = '';
+    hospital.timeSlots.forEach(slot => {
+      const timeSlotElement = document.createElement('div');
+      timeSlotElement.className = `time-slot border border-gray-300 rounded p-2 text-center cursor-pointer ${!slot.available ? 'time-slot-booked' : ''}`;
+      timeSlotElement.textContent = slot.time;
+      
+      if (slot.available) {
+        timeSlotElement.addEventListener('click', function() {
+          // Remove selected class from all time slots
+          document.querySelectorAll('#hospital-time-slots .time-slot').forEach(el => {
+            el.classList.remove('time-slot-selected');
+          });
+          // Add selected class to clicked time slot
+          this.classList.add('time-slot-selected');
+        });
+      }
+      
+      hospitalTimeSlots.appendChild(timeSlotElement);
+    });
+    
+    // Show hospital details container
+    hospitalDetails.classList.remove('hidden');
+  } else {
+    // Hide hospital details container if no location is selected
+    hospitalDetails.classList.add('hidden');
+  }
+});
+
+// Next button click
+nextBtn.addEventListener('click', function() {
+  step1.classList.add('hidden');
+  step2.classList.remove('hidden');
+  document.querySelector('.progress-step:nth-child(1)').classList.add('progress-step-completed');
+  document.querySelector('.progress-step:nth-child(2)').classList.add('progress-step-active');
+  window.scrollTo(0, 0);
+});
+
+// Back button click
+backBtn.addEventListener('click', function() {
+  step2.classList.add('hidden');
+  step1.classList.remove('hidden');
+  document.querySelector('.progress-step:nth-child(1)').classList.remove('progress-step-completed');
+  document.querySelector('.progress-step:nth-child(2)').classList.remove('progress-step-active');
+  window.scrollTo(0, 0);
+});
+
+// Calendar day selection
+calendarDays.forEach(day => {
+  day.addEventListener('click', function() {
+    calendarDays.forEach(d => d.classList.remove('calendar-day-selected'));
+    this.classList.add('calendar-day-selected');
+  });
+});
+
+// Time slot selection
+timeSlots.forEach(slot => {
+  slot.addEventListener('click', function() {
+    timeSlots.forEach(s => s.classList.remove('time-slot-selected'));
+    this.classList.add('time-slot-selected');
+  });
+});
+
+// Submit button click
+submitBtn.addEventListener('click', function() {
+  // Get selected hospital and time slot for confirmation message
+  const selectedLocation = locationSelect.value;
+  let selectedHospital = '';
+  let selectedTime = '';
+  
+  if (selectedLocation && hospitalData[selectedLocation]) {
+    selectedHospital = hospitalData[selectedLocation].name;
+    
+    const selectedTimeSlot = document.querySelector('#hospital-time-slots .time-slot-selected');
+    if (selectedTimeSlot) {
+      selectedTime = selectedTimeSlot.textContent.trim();
+    } else {
+      const regularTimeSlot = document.querySelector('.time-slot-selected');
+      if (regularTimeSlot) {
+        selectedTime = regularTimeSlot.textContent.trim();
+      }
+    }
+  }
+  
+  // Update confirmation message if hospital and time are selected
+  if (selectedHospital && selectedTime) {
+    const confirmationMessage = document.getElementById('confirmation-message');
+    if (confirmationMessage) {
+      const selectedDay = document.querySelector('.calendar-day-selected').textContent.trim();
+      confirmationMessage.textContent = `Your blood donation appointment has been scheduled for May ${selectedDay}, 2025 at ${selectedTime} at ${selectedHospital}.`;
+    }
+  }
+  
+  successModal.classList.remove('hidden');
+});
+
+// Close modal
+closeModal.addEventListener('click', function() {
+  successModal.classList.add('hidden');
+  // Reset form and go back to step 1
+  step2.classList.add('hidden');
+  step1.classList.remove('hidden');
+  document.querySelector('.progress-step:nth-child(1)').classList.remove('progress-step-completed');
+  document.querySelector('.progress-step:nth-child(2)').classList.remove('progress-step-active');
+  window.scrollTo(0, 0);
+});
+
+// Save for later
+saveBtn.addEventListener('click', function() {
+  alert('Your information has been saved. You can continue later.');
+});
+});
+</script>
+</body>
+</html>

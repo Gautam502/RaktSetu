@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About RaktSetu - Digital Blood Bank</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#4299e1'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+.timeline-connector {
+position: absolute;
+top: 24px;
+bottom: 0;
+left: 15px;
+width: 2px;
+background-color: #e2e8f0;
+z-index: -1;
+}
+.counter {
+transition: all 2s ease;
+}
+input:focus {
+outline: none;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<!-- Header -->
+<header class="bg-white shadow-sm fixed w-full top-0 z-50">
+<div class="container mx-auto px-6 py-4 flex justify-between items-center">
+<a href="iphome.html" class="flex items-center">
+<span class="text-primary text-2xl font-['Pacifico']">RaktSetu</span>
+</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a href="iphome.html" class="text-gray-600 hover:text-primary transition">Home</a>
+<a href="aboutpage.html" class="text-primary font-medium">About</a>
+<a href="contactuspage.html" class="text-gray-600 hover:text-primary transition">Contact</a>
+<a href="donatenow.html" class="bg-primary text-white px-5 py-2 !rounded-button hover:bg-red-600 transition whitespace-nowrap">Donate Now</a>
+</nav>
+<button class="md:hidden w-10 h-10 flex items-center justify-center">
+<i class="ri-menu-line text-gray-700 ri-lg"></i>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="pt-24 pb-16 md:pt-32 md:pb-20 relative overflow-hidden">
+<div class="absolute inset-0 z-0" style="background-image: url('https://readdy.ai/api/search-image?query=medical%20background%20with%20subtle%20pattern%20of%20blood%20cells%20and%20medical%20symbols%2C%20light%20color%20palette%20with%20soft%20whites%20and%20very%20light%20reds%2C%20clean%20and%20minimal%20healthcare%20design%2C%20professional%20medical%20aesthetic%2C%20abstract%20pattern%20that%20conveys%20healthcare%20and%20blood%20donation&width=1920&height=600&seq=1&orientation=landscape'); background-size: cover; background-position: center; opacity: 0.1;"></div>
+<div class="container mx-auto px-6 relative z-10">
+<div class="max-w-3xl mx-auto text-center">
+<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About RaktSetu</h1>
+<p class="text-xl text-gray-600">Connecting Lives Through Digital Blood Banking</p>
+</div>
+</div>
+</section>
+<!-- Mission Statement -->
+<section class="py-16 bg-white">
+<div class="container mx-auto px-6">
+<div class="max-w-4xl mx-auto">
+<div class="flex flex-col md:flex-row items-center gap-8 mb-10">
+<div class="w-20 h-20 flex items-center justify-center bg-red-50 rounded-full shrink-0">
+<i class="ri-heart-pulse-line text-primary ri-2x"></i>
+</div>
+<div>
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
+<p class="text-lg text-gray-600">To revolutionize blood donation and distribution through digital innovation, ensuring timely access to safe blood for everyone in need.</p>
+</div>
+</div>
+<div class="bg-red-50 p-6 md:p-8 rounded-lg border border-red-100 mb-8">
+<p class="text-lg text-gray-800 italic">"At RaktSetu, we believe that no one should lose their life due to lack of blood. Our digital platform bridges the gap between donors and recipients, making blood donation more accessible, efficient, and impactful."</p>
+</div>
+<p class="text-gray-600">RaktSetu is a pioneering digital blood bank platform that leverages technology to streamline the blood donation process. We're building a robust network connecting donors, hospitals, and patients to ensure that blood reaches those who need it most, when they need it most.</p>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="w-12 h-12 flex items-center justify-center bg-blue-50 rounded-full mb-4">
+<i class="ri-eye-line text-blue-500 ri-lg"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Our Vision</h3>
+<p class="text-gray-600">To create a world where every person has timely access to safe blood, powered by a community-driven digital ecosystem that makes giving and receiving blood seamless.</p>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+<div class="w-12 h-12 flex items-center justify-center bg-green-50 rounded-full mb-4">
+<i class="ri-hand-heart-line text-green-500 ri-lg"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Our Values</h3>
+<p class="text-gray-600">Compassion, Innovation, Reliability, Transparency, and Community. These core values guide every aspect of our work and shape our approach to revolutionizing blood banking.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Statistics -->
+<section class="py-16 bg-gray-50">
+<div class="container mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Our Impact</h2>
+<p class="text-lg text-gray-600 max-w-2xl mx-auto">We're just getting started on our journey to transform blood banking. Here's where we stand today.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+<div class="w-16 h-16 mx-auto flex items-center justify-center bg-blue-50 rounded-full mb-4">
+<i class="ri-user-heart-line text-blue-500 ri-xl"></i>
+</div>
+<h3 class="text-lg font-medium text-gray-600 mb-2">Donors Registered</h3>
+<p class="text-4xl font-bold text-gray-900 mb-1 counter" data-target="0">0</p>
+<p class="text-sm text-gray-500">and growing</p>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+<div class="w-16 h-16 mx-auto flex items-center justify-center bg-green-50 rounded-full mb-4">
+<i class="ri-heart-add-line text-green-500 ri-xl"></i>
+</div>
+<h3 class="text-lg font-medium text-gray-600 mb-2">Lives Saved</h3>
+<p class="text-4xl font-bold text-gray-900 mb-1 counter" data-target="0">0</p>
+<p class="text-sm text-gray-500">our ultimate goal</p>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+<div class="w-16 h-16 mx-auto flex items-center justify-center bg-red-50 rounded-full mb-4">
+<i class="ri-hospital-line text-primary ri-xl"></i>
+</div>
+<h3 class="text-lg font-medium text-gray-600 mb-2">Partner Hospitals</h3>
+<p class="text-4xl font-bold text-gray-900 mb-1 counter" data-target="0">0</p>
+<p class="text-sm text-gray-500">partnerships in progress</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Journey -->
+<section class="py-16 bg-white">
+<div class="container mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Our Journey</h2>
+<p class="text-lg text-gray-600 max-w-2xl mx-auto">From concept to reality, follow our path as we build RaktSetu from the ground up.</p>
+</div>
+<div class="max-w-3xl mx-auto">
+<div class="relative">
+<div class="timeline-connector"></div>
+<div class="relative pl-10 pb-12">
+<div class="absolute left-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+<i class="ri-lightbulb-line text-white"></i>
+</div>
+<div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+<span class="text-sm font-medium text-primary">January 2025</span>
+<h3 class="text-xl font-semibold text-gray-900 mt-1 mb-2">Concept Development</h3>
+<p class="text-gray-600">Ananya and Suryansh identified the critical gaps in blood banking systems and conceptualized RaktSetu as a digital solution to bridge these gaps.</p>
+</div>
+</div>
+<div class="relative pl-10 pb-12">
+<div class="absolute left-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+<i class="ri-team-line text-white"></i>
+</div>
+<div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+<span class="text-sm font-medium text-blue-500">January 2025</span>
+<h3 class="text-xl font-semibold text-gray-900 mt-1 mb-2">Team Formation</h3>
+<p class="text-gray-600">The founding team was established, bringing together expertise in healthcare, technology, and operations to build a comprehensive digital blood banking platform.</p>
+</div>
+</div>
+<div class="relative pl-10">
+<div class="absolute left-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+<i class="ri-code-box-line text-white"></i>
+</div>
+<div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+<span class="text-sm font-medium text-green-500">January - May 2025</span>
+<h3 class="text-xl font-semibold text-gray-900 mt-1 mb-2">Platform Development</h3>
+<p class="text-gray-600">Development of the RaktSetu platform began in January and was completed in May, focusing on creating a user-friendly interface for donors, recipients, and healthcare providers.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Team Section -->
+<section class="py-16 bg-gray-50">
+<div class="container mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
+<p class="text-lg text-gray-600 max-w-2xl mx-auto">The passionate founders behind RaktSetu who are committed to making a difference.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-1">Ananya Anand Gautam</h3>
+<p class="text-primary font-medium mb-4">Co-Founder & CEO</p>
+<p class="text-gray-600 mb-4">Ananya brings technical expertise and innovation to RaktSetu. With a strong background in software development and healthcare technology, he leads our technical strategy and platform development to create seamless user experiences.</p>
+<div class="flex space-x-3">
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+<i class="ri-linkedin-fill text-gray-700"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+<i class="ri-twitter-fill text-gray-700"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+<i class="ri-mail-line text-gray-700"></i>
+</a>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+<div class="p-6">
+<h3 class="text-xl font-semibold text-gray-900 mb-1">Suryansh Gautam</h3>
+<p class="text-primary font-medium mb-4">Co-Founder & CTO</p>
+<p class="text-gray-600 mb-4">A background in healthcare management and a passion for technology, Suryansh leads RaktSetu's vision to transform blood banking through digital innovation. Her experience in healthcare systems helps drive our mission forward.</p>
+<div class="flex space-x-3">
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+<i class="ri-linkedin-fill text-gray-700"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+<i class="ri-github-fill text-gray-700"></i>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition">
+<i class="ri-mail-line text-gray-700"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Strip -->
+<section class="py-10 bg-primary">
+<div class="container mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+<div class="flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-white bg-opacity-20 rounded-full mr-4">
+<i class="ri-phone-line text-white ri-lg"></i>
+</div>
+<div>
+<p class="text-white text-opacity-80 text-sm">Emergency Helpline</p>
+<p class="text-lg font-semibold">+91 9608769425</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-white bg-opacity-20 rounded-full mr-4">
+<i class="ri-map-pin-line text-white ri-lg"></i>
+</div>
+<div>
+<p class="text-white text-opacity-80 text-sm">Our Location</p>
+<p class="text-lg font-semibold">Chandigarh, India</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-12 h-12 flex items-center justify-center bg-white bg-opacity-20 rounded-full mr-4">
+<i class="ri-mail-line text-white ri-lg"></i>
+</div>
+<div>
+<p class="text-white text-opacity-80 text-sm">Email Us</p>
+<p class="text-lg font-semibold">contact@raktsetu.org</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+<div class="container mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<div>
+<a href="iphome.html" class="inline-block mb-4">
+<span class="text-white text-2xl font-['Pacifico']">RaktSetu</span>
+</a>
+<p class="text-gray-400 mb-4">Connecting donors with those in need through innovative technology and compassionate care.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition">
+<i class="ri-facebook-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition">
+<i class="ri-twitter-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition">
+<i class="ri-instagram-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition">
+<i class="ri-linkedin-fill text-white"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="iphome.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+<li><a href="contactuspage.html" class="text-gray-400 hover:text-white transition">Contact</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Resources</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white transition">Blood Donation FAQ</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Blood Types Guide</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Research & News</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+<ul class="space-y-2">
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center mt-1 mr-2">
+<i class="ri-map-pin-line text-primary"></i>
+</div>
+<span class="text-gray-400">123 Medical Center office, chandigarh</span>
+</li>
+<li class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-phone-line text-primary"></i>
+</div>
+<span class="text-gray-400">+91 9608769425</span>
+</li>
+<li class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-mail-line text-primary"></i>
+</div>
+<span class="text-gray-400">ananyanandgautam1503@gmail.com</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8">
+<p class="text-gray-500 text-center font-sans">© 2025 RaktSetu. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Counter animation
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter => {
+const target = parseInt(counter.getAttribute('data-target'));
+const duration = 2000; // ms
+const steps = 50;
+const stepTime = duration / steps;
+const stepValue = target / steps;
+let current = 0;
+const timer = setInterval(() => {
+current += stepValue;
+counter.textContent = Math.round(current);
+if (current >= target) {
+counter.textContent = target;
+clearInterval(timer);
+}
+}, stepTime);
+});
+});
+</script>
+</body>
+</html>

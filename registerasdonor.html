@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register as a Blood Donor - RaktSetu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#f6e05e'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type="number"] {
+-moz-appearance: textfield;
+}
+.custom-checkbox {
+position: relative;
+padding-left: 30px;
+cursor: pointer;
+}
+.custom-checkbox input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+.checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 20px;
+width: 20px;
+border: 2px solid #e2e8f0;
+border-radius: 4px;
+}
+.custom-checkbox input:checked ~ .checkmark {
+background-color: #e53e3e;
+border-color: #e53e3e;
+}
+.checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+.custom-checkbox input:checked ~ .checkmark:after {
+display: block;
+}
+.custom-checkbox .checkmark:after {
+left: 6px;
+top: 2px;
+width: 6px;
+height: 12px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.toggle-switch {
+position: relative;
+display: inline-block;
+width: 48px;
+height: 24px;
+}
+.toggle-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.toggle-slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #e2e8f0;
+transition: .4s;
+border-radius: 24px;
+}
+.toggle-slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .toggle-slider {
+background-color: #e53e3e;
+}
+input:checked + .toggle-slider:before {
+transform: translateX(24px);
+}
+.custom-radio {
+display: inline-flex;
+align-items: center;
+cursor: pointer;
+margin-right: 16px;
+}
+.custom-radio input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+.radio-mark {
+position: relative;
+height: 20px;
+width: 20px;
+background-color: #fff;
+border: 2px solid #e2e8f0;
+border-radius: 50%;
+margin-right: 8px;
+}
+.custom-radio input:checked ~ .radio-mark {
+border-color: #e53e3e;
+}
+.radio-mark:after {
+content: "";
+position: absolute;
+display: none;
+top: 3px;
+left: 3px;
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background: #e53e3e;
+}
+.custom-radio input:checked ~ .radio-mark:after {
+display: block;
+}
+.custom-file-upload {
+border: 2px dashed #e2e8f0;
+border-radius: 8px;
+padding: 24px;
+text-align: center;
+cursor: pointer;
+transition: all 0.3s;
+}
+.custom-file-upload:hover {
+border-color: #e53e3e;
+}
+.custom-file-upload input {
+display: none;
+}
+.captcha-container {
+background-color: #f7fafc;
+border-radius: 8px;
+padding: 16px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.captcha-text {
+font-family: 'Courier New', monospace;
+font-size: 24px;
+font-weight: bold;
+letter-spacing: 4px;
+color: #4a5568;
+text-decoration: line-through;
+background: linear-gradient(45deg, transparent 45%, #e53e3e 45%, #e53e3e 55%, transparent 55%),
+linear-gradient(135deg, transparent 45%, #e53e3e 45%, #e53e3e 55%, transparent 55%);
+background-size: 8px 8px;
+background-position: 0 0, 4px 4px;
+}
+.custom-select {
+position: relative;
+display: inline-block;
+width: 100%;
+}
+.custom-select select {
+display: none;
+}
+.select-selected {
+background-color: white;
+border: 1px solid #e2e8f0;
+border-radius: 8px;
+padding: 10px 16px;
+cursor: pointer;
+}
+.select-selected:after {
+position: absolute;
+content: "";
+top: 18px;
+right: 16px;
+width: 8px;
+height: 8px;
+border: solid #4a5568;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.select-selected.select-arrow-active:after {
+transform: rotate(-135deg);
+top: 22px;
+}
+.select-items {
+position: absolute;
+background-color: white;
+top: 100%;
+left: 0;
+right: 0;
+z-index: 99;
+border: 1px solid #e2e8f0;
+border-radius: 0 0 8px 8px;
+max-height: 200px;
+overflow-y: auto;
+display: none;
+}
+.select-items div {
+color: #4a5568;
+padding: 10px 16px;
+cursor: pointer;
+}
+.select-items div:hover {
+background-color: #f7fafc;
+}
+.select-hide {
+display: none;
+}
+.same-as-selected {
+background-color: #f7fafc;
+}
+</style>
+</head>
+<body class="bg-gray-50 font-sans">
+<header class="bg-white shadow-sm">
+<div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<div class="flex items-center">
+<h1 class="text-2xl font-['Pacifico'] text-primary">RaktSetu</h1>
+</div>
+<div class="flex items-center space-x-4">
+<!-- Buttons removed -->
+</div>
+</div>
+</header>
+<main class="container mx-auto px-4 py-8 max-w-3xl">
+<div class="text-center mb-8">
+<h1 class="text-3xl font-bold text-gray-800 mb-2">Register as a Blood Donor</h1>
+<p class="text-gray-600">Join our community of lifesavers and help save lives through blood donation</p>
+</div>
+<div class="bg-white shadow-md rounded-lg p-6 mb-8">
+<form id="donor-registration-form">
+<!-- Personal Details Section -->
+<div class="mb-8">
+<div class="flex items-center mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-2">
+<i class="ri-user-line text-primary"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Personal Details</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="col-span-2">
+<label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name <span class="text-primary">*</span></label>
+<input type="text" id="fullName" name="fullName" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Enter your full name">
+</div>
+<div>
+<label for="age" class="block text-sm font-medium text-gray-700 mb-1">Age <span class="text-primary">*</span></label>
+<input type="number" id="age" name="age" min="18" max="65" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Enter your age">
+<p class="text-xs text-gray-500 mt-1">You must be between 18-65 years old to donate blood</p>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Gender <span class="text-primary">*</span></label>
+<div class="flex items-center mt-2">
+<label class="custom-radio">
+<input type="radio" name="gender" value="male" checked>
+<span class="radio-mark"></span>
+<span>Male</span>
+</label>
+<label class="custom-radio">
+<input type="radio" name="gender" value="female">
+<span class="radio-mark"></span>
+<span>Female</span>
+</label>
+<label class="custom-radio">
+<input type="radio" name="gender" value="other">
+<span class="radio-mark"></span>
+<span>Other</span>
+</label>
+</div>
+</div>
+<div>
+<label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth (Optional)</label>
+<input type="date" id="dob" name="dob" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
+</div>
+</div>
+</div>
+<!-- Blood Information Section -->
+<div class="mb-8">
+<div class="flex items-center mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-2">
+<i class="ri-heart-pulse-line text-primary"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Blood Information</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label for="bloodGroup" class="block text-sm font-medium text-gray-700 mb-1">Blood Group <span class="text-primary">*</span></label>
+<div class="custom-select">
+<select id="bloodGroup" name="bloodGroup" required>
+<option value="" disabled selected>Select your blood group</option>
+<option value="A+">A+</option>
+<option value="A-">A-</option>
+<option value="B+">B+</option>
+<option value="B-">B-</option>
+<option value="AB+">AB+</option>
+<option value="AB-">AB-</option>
+<option value="O+">O+</option>
+<option value="O-">O-</option>
+</select>
+<div class="select-selected">Select your blood group</div>
+</div>
+</div>
+<div>
+<label for="lastDonation" class="block text-sm font-medium text-gray-700 mb-1">Last Donation Date (Optional)</label>
+<input type="date" id="lastDonation" name="lastDonation" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
+</div>
+<div class="col-span-2">
+<label class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700">Willing to donate when needed</span>
+<label class="toggle-switch">
+<input type="checkbox" name="willingToDonate" checked>
+<span class="toggle-slider"></span>
+</label>
+</label>
+</div>
+</div>
+</div>
+<!-- Contact Details Section -->
+<div class="mb-8">
+<div class="flex items-center mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-2">
+<i class="ri-contacts-line text-primary"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">Contact Details</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number <span class="text-primary">*</span></label>
+<div class="flex">
+<div class="flex items-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l">
+<span class="text-gray-500">+91</span>
+</div>
+<input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required class="w-full px-4 py-2 border border-gray-300 rounded-r focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="10-digit mobile number">
+</div>
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-primary">*</span></label>
+<input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Enter your email address">
+</div>
+<div class="col-span-2">
+<label for="address" class="block text-sm font-medium text-gray-700 mb-1">Street Address <span class="text-primary">*</span></label>
+<textarea id="address" name="address" rows="2" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition resize-none" placeholder="Enter your complete address"></textarea>
+</div>
+<div>
+<label for="city" class="block text-sm font-medium text-gray-700 mb-1">City / District <span class="text-primary">*</span></label>
+<input type="text" id="city" name="city" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Enter your city or district">
+</div>
+<div>
+<label for="state" class="block text-sm font-medium text-gray-700 mb-1">State <span class="text-primary">*</span></label>
+<div class="custom-select">
+<select id="state" name="state" required>
+<option value="" disabled selected>Select your state</option>
+<option value="Andhra Pradesh">Andhra Pradesh</option>
+<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+<option value="Assam">Assam</option>
+<option value="Bihar">Bihar</option>
+<option value="Chhattisgarh">Chhattisgarh</option>
+<option value="Goa">Goa</option>
+<option value="Gujarat">Gujarat</option>
+<option value="Haryana">Haryana</option>
+<option value="Himachal Pradesh">Himachal Pradesh</option>
+<option value="Jharkhand">Jharkhand</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Kerala">Kerala</option>
+<option value="Madhya Pradesh">Madhya Pradesh</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Manipur">Manipur</option>
+<option value="Meghalaya">Meghalaya</option>
+<option value="Mizoram">Mizoram</option>
+<option value="Nagaland">Nagaland</option>
+<option value="Odisha">Odisha</option>
+<option value="Punjab">Punjab</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Sikkim">Sikkim</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Telangana">Telangana</option>
+<option value="Tripura">Tripura</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Uttarakhand">Uttarakhand</option>
+<option value="West Bengal">West Bengal</option>
+</select>
+<div class="select-selected">Select your state</div>
+</div>
+</div>
+<div>
+<label for="pincode" class="block text-sm font-medium text-gray-700 mb-1">Pincode <span class="text-primary">*</span></label>
+<input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="6-digit pincode">
+</div>
+</div>
+</div>
+<!-- Document Upload Section -->
+<div class="mb-8">
+<div class="flex items-center mb-4">
+<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-2">
+<i class="ri-file-upload-line text-primary"></i>
+</div>
+<h2 class="text-xl font-semibold text-gray-800">ID Verification (Optional)</h2>
+</div>
+<label class="custom-file-upload">
+<input type="file" id="idProof" name="idProof" accept="image/jpeg,image/png,application/pdf">
+<div class="w-12 h-12 mx-auto flex items-center justify-center bg-red-50 rounded-full mb-2">
+<i class="ri-upload-cloud-line text-primary ri-xl"></i>
+</div>
+<p class="text-gray-700 font-medium">Drag & drop your ID proof here</p>
+<p class="text-sm text-gray-500 mt-1">or <span class="text-primary">browse files</span></p>
+<p class="text-xs text-gray-500 mt-2">Supported formats: JPEG, PNG, PDF (Max size: 5MB)</p>
+</label>
+</div>
+<!-- Captcha Section -->
+<div class="mb-8">
+<div class="captcha-container">
+<div id="captchaText" class="captcha-text px-4 py-2">RK7D9X</div>
+<div class="flex items-center">
+<input type="text" id="captchaInput" name="captchaInput" required class="w-32 px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary focus:border-primary outline-none transition mr-2" placeholder="Enter code">
+<button type="button" id="refreshCaptcha" class="p-2 text-gray-500 hover:text-primary transition-colors">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-refresh-line"></i>
+</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Consent Section -->
+<div class="mb-8">
+<label class="custom-checkbox">
+<input type="checkbox" name="consent" required>
+<span class="checkmark"></span>
+<span class="text-gray-700">I agree to be contacted for blood donation when needed and accept the <a href="#" class="text-primary hover:underline">Terms & Conditions</a></span>
+</label>
+<p class="text-sm text-gray-500 mt-4">
+<div class="w-5 h-5 flex items-center justify-center float-left mr-2 text-primary">
+<i class="ri-shield-check-line"></i>
+</div>
+Your personal information will be kept confidential and will only be used for blood donation purposes. We may contact you in case of emergency blood requirements matching your blood group in your area.
+</p>
+</div>
+<!-- Submit Button -->
+<div class="text-center">
+<button type="submit" class="bg-primary text-white px-8 py-3 !rounded-button hover:bg-red-600 transition-colors font-medium text-lg shadow-md whitespace-nowrap">
+Register as Donor
+</button>
+<p class="text-sm text-gray-600 mt-4">
+Already registered? <a href="#" class="text-primary hover:underline">Sign in here</a>
+</p>
+</div>
+</form>
+</div>
+</main>
+<footer class="bg-gray-900 text-white py-12">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+<!-- Column 1 -->
+<div>
+<h3 class="text-xl font-semibold mb-4">RaktSetu</h3>
+<p class="text-gray-400 mb-4">Connecting donors with those in need through innovative technology and compassionate care.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+<i class="ri-facebook-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+<i class="ri-twitter-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+<i class="ri-instagram-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+<i class="ri-linkedin-fill"></i>
+</a>
+</div>
+</div>
+<!-- Column 2 -->
+<div>
+<h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+<ul class="space-y-2">
+<li><a href="iphome.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+<li><a href="aboutpage.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+<li><a href="contactuspage.html" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+</ul>
+</div>
+<!-- Column 3 -->
+<div>
+<h3 class="text-xl font-semibold mb-4">Resources</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blood Donation FAQ</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blood Types Guide</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Research & News</a></li>
+</ul>
+</div>
+<!-- Column 4 -->
+<div>
+<h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+<ul class="space-y-2">
+<li class="flex items-start">
+<div class="w-5 h-5 flex items-center justify-center mt-1 mr-2">
+<i class="ri-map-pin-line text-primary"></i>
+</div>
+<span class="text-gray-400">123 Medical Center office, chandigarh</span>
+</li>
+<li class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-phone-line text-primary"></i>
+</div>
+<span class="text-gray-400">+91 9608769425</span>
+</li>
+<li class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-mail-line text-primary"></i>
+</div>
+<span class="text-gray-400">ananyanandgautam1503@gmail.com</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8 mt-8 text-center">
+<p class="text-gray-400">&copy; 2025 RaktSetu Management System. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+function generateCaptcha() {
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let captcha = '';
+    for (let i = 0; i < 6; i++) {
+        captcha += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return captcha;
+}
+function refreshCaptcha() {
+    const captchaText = document.getElementById('captchaText');
+    const captchaInput = document.getElementById('captchaInput');
+    const refreshButton = document.getElementById('refreshCaptcha');
+    
+    refreshButton.style.transform = 'rotate(180deg)';
+    refreshButton.style.transition = 'transform 0.3s ease';
+    
+    setTimeout(() => {
+        captchaText.textContent = generateCaptcha();
+        captchaInput.value = '';
+        refreshButton.style.transform = 'rotate(0deg)';
+    }, 150);
+}
+document.getElementById('refreshCaptcha').addEventListener('click', refreshCaptcha);
+// Custom Select Implementation
+let customSelects = document.getElementsByClassName("custom-select");
+for (let i = 0; i < customSelects.length; i++) {
+let selectElement = customSelects[i].getElementsByTagName("select")[0];
+let selectedDiv = customSelects[i].getElementsByClassName("select-selected")[0];
+selectedDiv.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
+let itemsDiv = document.createElement("DIV");
+itemsDiv.setAttribute("class", "select-items select-hide");
+for (let j = 1; j < selectElement.length; j++) {
+let optionDiv = document.createElement("DIV");
+optionDiv.innerHTML = selectElement.options[j].innerHTML;
+optionDiv.addEventListener("click", function() {
+let selectElement = this.parentNode.parentNode.getElementsByTagName("select")[0];
+let selectedDiv = this.parentNode.previousSibling;
+for (let i = 0; i < selectElement.length; i++) {
+if (selectElement.options[i].innerHTML === this.innerHTML) {
+selectElement.selectedIndex = i;
+selectedDiv.innerHTML = this.innerHTML;
+let sameAsSelected = this.parentNode.getElementsByClassName("same-as-selected");
+for (let k = 0; k < sameAsSelected.length; k++) {
+sameAsSelected[k].removeAttribute("class");
+}
+this.setAttribute("class", "same-as-selected");
+break;
+}
+}
+selectedDiv.click();
+});
+itemsDiv.appendChild(optionDiv);
+}
+customSelects[i].appendChild(itemsDiv);
+selectedDiv.addEventListener("click", function(e) {
+e.stopPropagation();
+closeAllSelect(this);
+this.nextSibling.classList.toggle("select-hide");
+this.classList.toggle("select-arrow-active");
+});
+}
+function closeAllSelect(elmnt) {
+let selectItems = document.getElementsByClassName("select-items");
+let selectSelected = document.getElementsByClassName("select-selected");
+let arrNo = [];
+for (let i = 0; i < selectSelected.length; i++) {
+if (elmnt == selectSelected[i]) {
+arrNo.push(i);
+} else {
+selectSelected[i].classList.remove("select-arrow-active");
+}
+}
+for (let i = 0; i < selectItems.length; i++) {
+if (arrNo.indexOf(i)) {
+selectItems[i].classList.add("select-hide");
+}
+}
+}
+document.addEventListener("click", closeAllSelect);
+// File Upload Preview
+const fileInput = document.getElementById('idProof');
+const fileUpload = document.querySelector('.custom-file-upload');
+fileInput.addEventListener('change', function() {
+if (this.files && this.files[0]) {
+const fileName = this.files[0].name;
+const fileSize = (this.files[0].size / 1024 / 1024).toFixed(2);
+let fileInfo = document.createElement('div');
+fileInfo.className = 'mt-4 p-3 bg-gray-50 rounded flex items-center';
+fileInfo.innerHTML = `
+<div class="w-8 h-8 flex items-center justify-center bg-red-100 rounded-full mr-3">
+<i class="ri-file-text-line text-primary"></i>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-gray-700 truncate">${fileName}</p>
+<p class="text-xs text-gray-500">${fileSize} MB</p>
+</div>
+<button type="button" class="text-gray-400 hover:text-red-500 ml-2 remove-file">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-close-line"></i>
+</div>
+</button>
+`;
+// Remove existing preview if any
+const existingPreview = fileUpload.querySelector('.mt-4');
+if (existingPreview) {
+fileUpload.removeChild(existingPreview);
+}
+fileUpload.appendChild(fileInfo);
+// Add remove file functionality
+const removeButton = fileInfo.querySelector('.remove-file');
+removeButton.addEventListener('click', function(e) {
+e.preventDefault();
+fileInput.value = '';
+fileUpload.removeChild(fileInfo);
+});
+}
+});
+// Form Validation
+const form = document.getElementById('donor-registration-form');
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+// Basic validation
+const age = document.getElementById('age').value;
+if (age < 18 || age > 65) {
+alert('Age must be between 18 and 65 years to donate blood.');
+return;
+}
+const phone = document.getElementById('phone').value;
+if (phone.length !== 10 || !/^\d+$/.test(phone)) {
+alert('Please enter a valid 10-digit mobile number.');
+return;
+}
+const pincode = document.getElementById('pincode').value;
+if (pincode.length !== 6 || !/^\d+$/.test(pincode)) {
+alert('Please enter a valid 6-digit pincode.');
+return;
+}
+// Captcha validation (in a real app, this would be server-side)
+const captchaInput = document.getElementById('captchaInput').value;
+if (captchaInput !== 'RK7D9X') {
+alert('Incorrect captcha. Please try again.');
+return;
+}
+// If all validations pass
+const currentCaptcha = document.getElementById('captchaText').textContent;
+if (captchaInput !== currentCaptcha) {
+    alert('Incorrect captcha. Please try again.');
+    return;
+}
+alert('Registration successful! Thank you for registering as a blood donor.');
+form.reset();
+});
+});
+</script>
+</body>
+</html>

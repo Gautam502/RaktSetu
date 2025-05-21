@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Blood Request - Blood Bank</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#e53e3e',secondary:'#f6ad55'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type="number"] {
+-moz-appearance: textfield;
+}
+.custom-radio input:checked + span {
+background-color: #e53e3e;
+border-color: #e53e3e;
+}
+.custom-radio input:checked + span:after {
+content: "";
+position: absolute;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: white;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+.custom-checkbox input:checked + span {
+background-color: #e53e3e;
+border-color: #e53e3e;
+}
+.custom-checkbox input:checked + span:after {
+content: "";
+position: absolute;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+top: 40%;
+left: 50%;
+transform: translate(-50%, -50%) rotate(45deg);
+}
+.progress-step.active {
+background-color: #e53e3e;
+color: white;
+}
+.progress-step.active:after {
+background-color: #e53e3e;
+}
+.progress-step:after {
+content: "";
+position: absolute;
+width: 100%;
+height: 2px;
+background-color: #e2e8f0;
+top: 50%;
+left: 50%;
+z-index: -1;
+}
+.progress-step:last-child:after {
+display: none;
+}
+.custom-file-input::-webkit-file-upload-button {
+visibility: hidden;
+display: none;
+}
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<header class="bg-white shadow-md">
+<div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<div class="flex items-center">
+<div class="text-3xl font-['Pacifico'] text-primary">RaktSetu</div>
+</div>
+<div class="flex items-center">
+<div class="hidden md:flex items-center mr-8 text-gray-700">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-phone-fill ri-lg"></i>
+</div>
+<span class="ml-2">Emergency: <span class="text-primary font-bold">9608769425</span></span>
+</div>
+<button class="bg-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap">
+Donate Now
+</button>
+</div>
+</div>
+</header>
+<main class="container mx-auto px-4 py-8">
+<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+<div class="bg-primary text-white p-6">
+<h1 class="text-2xl md:text-3xl font-bold">Emergency Blood Request</h1>
+<p class="mt-2 text-white/80">Fill out this form to submit an urgent blood requirement</p>
+<div class="mt-4 flex items-center">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-phone-fill ri-lg"></i>
+</div>
+<span class="ml-2">Emergency Helpline: <span class="font-bold">9608769425</span></span>
+</div>
+</div>
+<form id="emergencyRequestForm" class="p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="md:col-span-2">
+<h2 class="text-xl font-semibold text-gray-800 mb-4">Patient Information</h2>
+</div>
+<div>
+<label for="patientName" class="block text-sm font-medium text-gray-700 mb-1">Patient Name <span class="text-primary">*</span></label>
+<input type="text" id="patientName" name="patientName" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Enter patient's full name">
+</div>
+<div>
+<label for="age" class="block text-sm font-medium text-gray-700 mb-1">Age <span class="text-primary">*</span></label>
+<input type="number" id="age" name="age" required min="0" max="120" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Enter age">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Gender <span class="text-primary">*</span></label>
+<div class="flex space-x-6">
+<label class="custom-radio flex items-center cursor-pointer">
+<input type="radio" name="gender" value="male" class="sr-only" required>
+<span class="w-5 h-5 border border-gray-300 rounded-full inline-block relative mr-2"></span>
+<span class="text-gray-700">Male</span>
+</label>
+<label class="custom-radio flex items-center cursor-pointer">
+<input type="radio" name="gender" value="female" class="sr-only">
+<span class="w-5 h-5 border border-gray-300 rounded-full inline-block relative mr-2"></span>
+<span class="text-gray-700">Female</span>
+</label>
+<label class="custom-radio flex items-center cursor-pointer">
+<input type="radio" name="gender" value="other" class="sr-only">
+<span class="w-5 h-5 border border-gray-300 rounded-full inline-block relative mr-2"></span>
+<span class="text-gray-700">Other</span>
+</label>
+</div>
+</div>
+<div>
+<label for="hospital" class="block text-sm font-medium text-gray-700 mb-1">Hospital/Location <span class="text-primary">*</span></label>
+<input type="text" id="hospital" name="hospital" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Enter hospital or location">
+</div>
+<div>
+<label for="contactNumber" class="block text-sm font-medium text-gray-700 mb-1">Contact Number <span class="text-primary">*</span></label>
+<input type="tel" id="contactNumber" name="contactNumber" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Enter primary contact number">
+</div>
+<div>
+<label for="alternateContact" class="block text-sm font-medium text-gray-700 mb-1">Alternate Contact Number</label>
+<input type="tel" id="alternateContact" name="alternateContact" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Enter alternate contact number">
+</div>
+<div class="md:col-span-2">
+<h2 class="text-xl font-semibold text-gray-800 mb-4 mt-4">Blood Requirement Details</h2>
+</div>
+<div>
+<label for="bloodGroup" class="block text-sm font-medium text-gray-700 mb-1">Blood Group <span class="text-primary">*</span></label>
+<div class="relative">
+<select id="bloodGroup" name="bloodGroup" required class="appearance-none w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary pr-8">
+<option value="" disabled selected>Select blood group</option>
+<option value="A+">A+</option>
+<option value="A-">A-</option>
+<option value="B+">B+</option>
+<option value="B-">B-</option>
+<option value="AB+">AB+</option>
+<option value="AB-">AB-</option>
+<option value="O+">O+</option>
+<option value="O-">O-</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label for="unitsRequired" class="block text-sm font-medium text-gray-700 mb-1">Units Required <span class="text-primary">*</span></label>
+<input type="number" id="unitsRequired" name="unitsRequired" required min="1" max="20" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Enter number of units">
+</div>
+<div>
+<label for="requiredDate" class="block text-sm font-medium text-gray-700 mb-1">Required By (Date) <span class="text-primary">*</span></label>
+<input type="date" id="requiredDate" name="requiredDate" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+</div>
+<div>
+<label for="requiredTime" class="block text-sm font-medium text-gray-700 mb-1">Required By (Time) <span class="text-primary">*</span></label>
+<input type="time" id="requiredTime" name="requiredTime" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+</div>
+<div class="md:col-span-2">
+<label for="reason" class="block text-sm font-medium text-gray-700 mb-1">Reason for Requirement <span class="text-primary">*</span></label>
+<textarea id="reason" name="reason" rows="3" required class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary" placeholder="Please provide details about the medical condition or reason"></textarea>
+</div>
+<div class="md:col-span-2">
+<label for="certificate" class="block text-sm font-medium text-gray-700 mb-1">Medical Certificate Upload</label>
+<div class="relative">
+<input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png" class="custom-file-input absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+<div class="w-full px-4 py-2 border border-gray-300 rounded bg-white flex items-center justify-between">
+<span id="file-name" class="text-gray-500">No file chosen</span>
+<button type="button" class="bg-gray-200 text-gray-700 px-4 py-1 !rounded-button whitespace-nowrap">Browse Files</button>
+</div>
+</div>
+<p class="text-xs text-gray-500 mt-1">Upload doctor's prescription or medical certificate (PDF, JPG, PNG)</p>
+</div>
+<div class="md:col-span-2">
+<h2 class="text-xl font-semibold text-gray-800 mb-4 mt-4">Priority Level</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow bg-red-50 border-red-200">
+<input type="radio" name="urgency" value="immediate" class="sr-only" required>
+<div class="flex items-center">
+<div class="w-4 h-4 rounded-full bg-red-600 mr-2"></div>
+<span class="font-medium text-gray-800">Immediate</span>
+</div>
+<p class="text-sm text-gray-600 mt-2">Required within 2 hours</p>
+</label>
+<label class="border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow bg-orange-50 border-orange-200">
+<input type="radio" name="urgency" value="urgent" class="sr-only">
+<div class="flex items-center">
+<div class="w-4 h-4 rounded-full bg-orange-500 mr-2"></div>
+<span class="font-medium text-gray-800">Urgent</span>
+</div>
+<p class="text-sm text-gray-600 mt-2">Required within 24 hours</p>
+</label>
+<label class="border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow bg-yellow-50 border-yellow-200">
+<input type="radio" name="urgency" value="normal" class="sr-only">
+<div class="flex items-center">
+<div class="w-4 h-4 rounded-full bg-yellow-500 mr-2"></div>
+<span class="font-medium text-gray-800">Normal</span>
+</div>
+<p class="text-sm text-gray-600 mt-2">Required within 48 hours</p>
+</label>
+</div>
+</div>
+<div class="md:col-span-2 mt-4">
+<label class="custom-checkbox flex items-center cursor-pointer">
+<input type="checkbox" name="terms" required class="sr-only">
+<span class="w-5 h-5 border border-gray-300 rounded inline-block relative mr-2"></span>
+<span class="text-gray-700">I confirm that all information provided is accurate and I understand that verification may be required before the request is processed.</span>
+</label>
+</div>
+<div class="md:col-span-2 mt-6">
+<button type="submit" class="w-full bg-primary hover:bg-red-700 text-white font-bold py-3 !rounded-button transition-colors whitespace-nowrap flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-heart-pulse-fill"></i>
+</div>
+Submit Emergency Request
+</button>
+</div>
+</div>
+</form>
+<div id="statusTracker" class="p-6 bg-gray-50 border-t border-gray-200 hidden">
+<h2 class="text-xl font-semibold text-gray-800 mb-4">Request Status</h2>
+<div class="bg-white p-4 rounded-lg border border-gray-200 mb-4">
+<div class="flex justify-between items-center">
+<div>
+<p class="text-sm text-gray-500">Request ID</p>
+<p class="font-medium text-gray-800" id="requestId">ER-25051701</p>
+</div>
+<div>
+<p class="text-sm text-gray-500">Submitted On</p>
+<p class="font-medium text-gray-800" id="submittedDate">May 17, 2025</p>
+</div>
+</div>
+</div>
+<div class="relative flex justify-between mb-8">
+<div class="progress-step active relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-check-line"></i>
+</div>
+</div>
+<p class="text-sm mt-2 text-center">Request Received</p>
+</div>
+<div class="progress-step relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-file-search-line"></i>
+</div>
+</div>
+<p class="text-sm mt-2 text-center">Under Verification</p>
+</div>
+<div class="progress-step relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-heart-3-line"></i>
+</div>
+</div>
+<p class="text-sm mt-2 text-center">Blood Arranged</p>
+</div>
+<div class="progress-step relative z-10 flex flex-col items-center">
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-check-double-line"></i>
+</div>
+</div>
+<p class="text-sm mt-2 text-center">Completed</p>
+</div>
+</div>
+<div class="bg-red-50 border-l-4 border-primary p-4 rounded">
+<div class="flex">
+<div class="w-6 h-6 flex items-center justify-center text-primary mr-2">
+<i class="ri-information-line"></i>
+</div>
+<div>
+<p class="font-medium text-gray-800">Your request is being processed</p>
+<p class="text-sm text-gray-600 mt-1">A blood bank representative will contact you shortly. For urgent assistance, please call our emergency helpline at 9608769425.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-gray-800 text-white py-8 mt-12">
+<div class="container mx-auto px-4">
+<div class="text-center text-gray-400">
+<p>&copy; 2025 RaktSetu. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const form = document.getElementById('emergencyRequestForm');
+const statusTracker = document.getElementById('statusTracker');
+const fileInput = document.getElementById('certificate');
+const fileName = document.getElementById('file-name');
+const requestId = document.getElementById('requestId');
+const submittedDate = document.getElementById('submittedDate');
+// Handle file input display
+fileInput.addEventListener('change', function() {
+if (this.files.length > 0) {
+fileName.textContent = this.files[0].name;
+} else {
+fileName.textContent = 'No file chosen';
+}
+});
+// Handle form submission
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+// Show loading state
+const submitButton = form.querySelector('button[type="submit"]');
+const originalButtonText = submitButton.innerHTML;
+submitButton.innerHTML = '<div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div> Processing...';
+submitButton.disabled = true;
+// Simulate form submission
+setTimeout(function() {
+// Generate random request ID
+const randomNum = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+requestId.textContent = `ER-2505${randomNum}`;
+// Set current date
+const today = new Date();
+const options = { year: 'numeric', month: 'long', day: 'numeric' };
+submittedDate.textContent = today.toLocaleDateString('en-US', options);
+// Show status tracker
+form.classList.add('hidden');
+statusTracker.classList.remove('hidden');
+// Scroll to status tracker
+statusTracker.scrollIntoView({ behavior: 'smooth' });
+}, 2000);
+});
+// Handle priority selection
+const priorityOptions = document.querySelectorAll('input[name="urgency"]');
+priorityOptions.forEach(option => {
+option.addEventListener('change', function() {
+const labels = document.querySelectorAll('input[name="urgency"]').forEach(input => {
+const label = input.closest('label');
+if (input.checked) {
+label.classList.add('ring-2', 'ring-primary');
+} else {
+label.classList.remove('ring-2', 'ring-primary');
+}
+});
+});
+});
+// Set min date for required by date to today
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('requiredDate').setAttribute('min', today);
+});
+</script>
+</body>
+</html>
